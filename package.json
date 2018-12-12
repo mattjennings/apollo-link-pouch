@@ -1,9 +1,9 @@
 {
-  "name": "apollo-link-pouchdb",
+  "name": "apollo-link-pouch",
   "version": "0.0.1",
-  "description": "Query PouchDB in GraphQL with Apollo",
+  "description": "Use GraphQL with PouchDB and Apollo",
   "author": {
-    "name": "matt jennings",
+    "name": "Matt Jennings",
     "email": "mattjennings44@gmail.com"
   },
   "files": [
@@ -24,7 +24,7 @@
     "bundle": "./node_modules/.bin/webpack --config webpack.config.prod.js",
     "clean": "rimraf lib",
     "prebuild": "npm run clean",
-    "build": "tsc -p ./tsconfig.release.json --pretty",
+    "build": "tsc -p ./tsconfig.build.json --pretty",
     "postbuild": "npm run bundle",
     "prepublishOnly": "npm run clean && npm run build",
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --mode development"
