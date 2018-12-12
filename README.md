@@ -8,18 +8,18 @@ Inspired by [apollo-link-firebase](https://github.com/Canner/apollo-link-firebas
 
 ## PouchDB API
 
-[x] get
+- [x] get
 
-[ ] bulkGet
+- [ ] bulkGet
 
-[ ] put
+- [ ] put
 
-[ ] bulkDocs
+- [ ] bulkDocs
 
-[ ] query
+- [ ] query
 
-[ ] find
+- [ ] find
 
 ## Features
 
-[ ] subscriptions (using sync listeners?)
+- [ ] subscriptions (using sync listeners?)
