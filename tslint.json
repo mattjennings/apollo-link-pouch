@@ -1,0 +1,7 @@
+{
+  "exclude": ["node_modules", "lib"],
+  "extends": ["tslint-react", "tslint:latest", "tslint-config-prettier"],
+  "rules": {
+    "no-submodule-imports": false
+  }
+}

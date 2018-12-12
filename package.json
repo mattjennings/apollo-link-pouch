@@ -1,0 +1,77 @@
+{
+  "name": "apollo-link-pouchdb",
+  "version": "0.0.1",
+  "description": "Query PouchDB in GraphQL with Apollo",
+  "author": {
+    "name": "matt jennings",
+    "email": "mattjennings44@gmail.com"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/bundle.umd.js",
+  "module": "./lib/index.js",
+  "jsnext:main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "keywords": [
+    "apollo",
+    "apollo-link",
+    "graphql",
+    "pouchdb"
+  ],
+  "scripts": {
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "bundle": "./node_modules/.bin/webpack --config webpack.config.prod.js",
+    "clean": "rimraf lib",
+    "prebuild": "npm run clean",
+    "build": "tsc -p ./tsconfig.release.json --pretty",
+    "postbuild": "npm run bundle",
+    "prepublishOnly": "npm run clean && npm run build",
+    "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --mode development"
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.2",
+    "@types/jest": "^23.3.10",
+    "@types/node": "9.4.6",
+    "@types/pouchdb": "^6.3.2",
+    "@types/react": "16.0.40",
+    "@types/react-dom": "16.0.4",
+    "@types/webpack": "3.8.8",
+    "@types/webpack-env": "1.13.5",
+    "apollo-cache-inmemory": "^1.1.9",
+    "faker": "^4.1.0",
+    "jest": "^23.6.0",
+    "lodash": "^4.17.11",
+    "pouchdb-adapter-memory": "^7.0.0",
+    "prettier": "^1.15.3",
+    "react": "^16.6.3",
+    "react-addons-test-utils": "^15.6.2",
+    "react-apollo": "2.3.2",
+    "react-dom": "^16.6.3",
+    "rimraf": "^2.5.4",
+    "sinon": "^4.4.8",
+    "ts-jest": "^23.10.5",
+    "ts-loader": "^4.0.0",
+    "ts-node": "^5.0.1",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.17.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "repository": "mattjennings/apollo-link-pouchdb",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-client": "^2.2.7",
+    "apollo-link": "^1.2.1",
+    "apollo-link-schema": "^1.0.6",
+    "apollo-utilities": "^1.0.9",
+    "graphql": "0.13.0",
+    "graphql-anywhere": "^4.1.6",
+    "graphql-tag": "^2.8.0",
+    "graphql-tools": "^2.21.0",
+    "pouchdb": ">=6.4.0"
+  }
+}

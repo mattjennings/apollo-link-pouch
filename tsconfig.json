@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "moduleResolution": "node",
+    "removeComments": true,
+    "sourceMap": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "docs/**/*.ts", "test/*"],
+  "exclude": ["./node_modules"]
+}
