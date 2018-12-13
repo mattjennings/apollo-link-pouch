@@ -27,6 +27,7 @@
     "build": "tsc -p ./tsconfig.build.json --pretty",
     "postbuild": "npm run bundle",
     "prepublishOnly": "npm run clean && npm run build",
+    "test": "npm run jest",
     "start": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --mode development"
   },
   "devDependencies": {
