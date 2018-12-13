@@ -33,7 +33,7 @@ const client = new ApolloClient({
   ```js
   const query = gql`
     query getPerson {
-      person @pouchGet(id: "1") {
+      person @pdbGet(id: "1") {
         _id
         _rev
         name
@@ -42,11 +42,31 @@ const client = new ApolloClient({
   `
   ```
 
-- [ ] bulkGet
+- [x] bulkGet
+
+  ```js
+  const query = gql`
+    query bulkGet {
+      people @pdbBulkGet(docs: [{ id: "1" }, { id: "2" }]) {
+        results {
+          docs {
+            ok {
+              _id
+              _rev
+              name
+            }
+          }
+        }
+      }
+    }
+  `
+  ```
 
 - [ ] put
 
 - [ ] bulkDocs
+
+- [ ] allDocs
 
 - [ ] query
 

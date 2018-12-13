@@ -3,7 +3,7 @@ import { ExecInfo } from 'graphql-anywhere/lib/async'
 import { ResolverContext, ResolverRoot } from '../../types'
 import { QueryDirective } from './directives'
 
-const get: Resolver = async (
+const bulkGet: Resolver = async (
   fieldName: string,
   root: ResolverRoot,
   args: any,
@@ -13,33 +13,20 @@ const get: Resolver = async (
   const { directives, isLeaf, resultKey } = info
   const { database } = context
 
-  const {
-    id,
-    rev,
-    conflicts,
-    revs,
-    revs_info,
-    attachments,
-    binary,
-    latest,
-    type
-  } = directives[QueryDirective.GET]
+  const { docs, revs, attachments, binary } = directives[
+    QueryDirective.BULK_GET
+  ]
 
-  const getOptions = {
-    rev,
-    conflicts,
+  const { results } = await database.bulkGet({
+    docs,
     revs,
-    revs_info,
     attachments,
-    binary,
-    latest
-  }
-  const doc = await database.get(id, getOptions)
+    binary
+  })
 
   return {
-    ...doc,
-    __typename: type || (doc as any).type
+    results
   }
 }
 
-export default get
+export default bulkGet

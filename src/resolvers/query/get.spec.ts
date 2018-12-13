@@ -29,7 +29,7 @@ const people = [
   }
 ]
 
-describe('query resolver', () => {
+describe('@pdbGet', () => {
   beforeEach(async () => {
     db = new PouchDB('test', { adapter: 'memory' })
     client = new ApolloClient({
@@ -48,7 +48,7 @@ describe('query resolver', () => {
   it('should get a document', async () => {
     const query = gql`
       query getDoc {
-        doc @pdbGet(_id: "1") {
+        doc @pdbGet(id: "1") {
           _id
           _rev
           name
@@ -68,7 +68,7 @@ describe('query resolver', () => {
 
     const query = gql`
       query getDoc {
-        doc @pdbGet(_id: "1", _rev: "${rev}") {
+        doc @pdbGet(id: "1", rev: "${rev}") {
           _id
           _rev
           name
@@ -88,7 +88,7 @@ describe('query resolver', () => {
 
     const query = gql`
       query getDoc {
-        doc @pdbGet(_id: "1", revs: true) {
+        doc @pdbGet(id: "1", revs: true) {
           _revisions
         }
       }
@@ -117,7 +117,7 @@ describe('query resolver', () => {
 
     const query = gql`
       query getDoc {
-        doc @pdbGet(_id: "conflict", conflicts: true) {
+        doc @pdbGet(id: "conflict", conflicts: true) {
           _id
           _rev
           _conflicts

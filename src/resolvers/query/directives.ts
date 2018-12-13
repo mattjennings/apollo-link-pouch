@@ -1,3 +1,4 @@
 export enum QueryDirective {
-  GET = 'pdbGet'
+  GET = 'pdbGet',
+  BULK_GET = 'pdbBulkGet'
 }
