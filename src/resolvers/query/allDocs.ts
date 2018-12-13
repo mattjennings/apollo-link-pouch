@@ -13,15 +13,32 @@ const bulkGet: Resolver = async (
   const { directives, isLeaf, resultKey } = info
   const { database } = context
 
-  const { docs, revs, attachments, binary } = directives[
-    QueryDirective.BULK_GET
-  ]
-
-  return database.bulkGet({
-    docs,
-    revs,
+  const {
+    keys,
+    include_docs,
+    conflicts,
     attachments,
-    binary
+    binary,
+    startkey,
+    endkey,
+    inclusive_end,
+    limit,
+    skip,
+    descending
+  } = directives[QueryDirective.ALL_DOCS]
+
+  return database.allDocs({
+    keys,
+    include_docs,
+    conflicts,
+    attachments,
+    binary,
+    startkey,
+    endkey,
+    inclusive_end,
+    limit,
+    skip,
+    descending
   })
 }
 

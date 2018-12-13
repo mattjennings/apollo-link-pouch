@@ -66,7 +66,24 @@ const client = new ApolloClient({
 
 - [ ] bulkDocs
 
-- [ ] allDocs
+- [x] allDocs
+
+  ```js
+  const query = gql`
+    query allDocs {
+      people @pdbAllDocs(keys: ["1", "2"], include_docs: true) {
+        rows {
+          id
+          rev
+          doc
+          value
+        }
+        total_rows
+        offset
+      }
+    }
+  `
+  ```
 
 - [ ] query
 
