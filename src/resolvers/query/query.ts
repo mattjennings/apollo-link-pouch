@@ -1,11 +1,9 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
 import * as has from 'lodash/has'
-import { ResolverContext, ResolverRoot } from '../types'
-
-export enum QueryDirective {
-  GET = 'pouchGet'
-}
+import { ResolverContext, ResolverRoot } from '../../types'
+import { QueryDirective } from './directives'
+import get from './get'
 
 const queryResolver: Resolver = async (
   fieldName: string,
@@ -15,20 +13,14 @@ const queryResolver: Resolver = async (
   info: ExecInfo
 ) => {
   const { directives, isLeaf, resultKey } = info
-  const { database, exportVal } = context
+  const { database } = context
 
   if (isLeaf) {
-    return root[resultKey] || null
+    return (root && root[resultKey]) || null
   }
 
   if (has(directives, QueryDirective.GET)) {
-    const { id, type } = directives[QueryDirective.GET]
-    const doc = await database.get(id)
-
-    return {
-      ...doc,
-      __typename: type || (doc as any).type
-    }
+    return get(fieldName, root, args, context, info)
   }
 
   return null

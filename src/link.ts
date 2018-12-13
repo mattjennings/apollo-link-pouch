@@ -18,6 +18,7 @@ import { ResolverContext } from './types'
 // resolvers
 // import mutationResolver from './mutationResolver'
 import queryResolver from './resolvers/query'
+import { QueryDirective } from './resolvers/query/directives'
 
 const getResolver = (operationType: string): Resolver => {
   switch (operationType) {
@@ -43,7 +44,12 @@ export default class PouchLink extends ApolloLink {
     forward?: NextLink
   ): Observable<FetchResult> {
     const { query } = operation
-    const isPouchQuery = hasDirectives(['pouchGet'], query)
+
+    const pouchDirectives = Object.keys(QueryDirective).map(
+      key => QueryDirective[key]
+    )
+
+    const isPouchQuery = hasDirectives(pouchDirectives, query)
 
     if (!isPouchQuery && forward) {
       return forward(operation)
@@ -57,8 +63,7 @@ export default class PouchLink extends ApolloLink {
 
     // context for graphql-anywhere resolver
     const context: ResolverContext = {
-      database: this.database,
-      exportVal: {}
+      database: this.database
     }
 
     // rootValue for graphql-anywhere resolver

@@ -1,6 +1,5 @@
 export interface ResolverContext {
   database: PouchDB.Database
-  exportVal: any
 }
 
 export interface MutationResolverContext extends ResolverContext {

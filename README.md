@@ -13,8 +13,8 @@ npm install apollo-link-pouchdb
 ## Getting Started
 
 ```typescript
-import { createPouchLink } from 'apollo-link-pouch'
 import PouchDB from 'pouchdb'
+import { createPouchLink } from 'apollo-link-pouch'
 
 const client = new ApolloClient({
   link: createPouchLink({
