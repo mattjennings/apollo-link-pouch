@@ -1,3 +1,6 @@
+[![npm package](https://img.shields.io/npm/v/apollo-link-pouch/latest.svg)](https://www.npmjs.com/package/apollo-link-pouch)
+[![npm downloads](https://img.shields.io/npm/dm/apollo-link-pouch.svg)](https://www.npmjs.com/package/apollo-link-pouch)
+
 ## Apollo-link-pouch
 
 Provides an Apollo Link to use GraphQL with a local PouchDB.
