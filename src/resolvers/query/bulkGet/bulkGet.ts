@@ -1,9 +1,9 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
-import { ResolverContext, ResolverRoot } from '../../types'
-import { QueryDirective } from './directives'
+import { ResolverContext, ResolverRoot } from '../../../types'
+import { QueryDirective } from '../directives'
 
-const bulkGet: Resolver = async (
+export const bulkGet: Resolver = async (
   fieldName: string,
   root: ResolverRoot,
   args: any,
@@ -24,5 +24,3 @@ const bulkGet: Resolver = async (
     binary
   })
 }
-
-export default bulkGet

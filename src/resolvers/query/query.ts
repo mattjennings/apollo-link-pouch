@@ -2,10 +2,11 @@ import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
 import * as has from 'lodash/has'
 import { ResolverContext, ResolverRoot } from '../../types'
-import allDocs from './allDocs'
-import bulkGet from './bulkGet'
+import { allDocs } from './allDocs'
+import { bulkGet } from './bulkGet'
 import { QueryDirective } from './directives'
-import get from './get'
+import { get } from './get'
+import { plugin } from './plugin'
 
 const queryResolver: Resolver = async (
   fieldName: string,
@@ -35,6 +36,10 @@ const queryResolver: Resolver = async (
 
   if (has(directives, QueryDirective.ALL_DOCS)) {
     return allDocs(fieldName, root, args, context, info)
+  }
+
+  if (has(directives, QueryDirective.PLUGIN)) {
+    return plugin(fieldName, root, args, context, info)
   }
 
   if (typeof root[fieldName] === 'undefined') {

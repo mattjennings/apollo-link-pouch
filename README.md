@@ -1,4 +1,4 @@
-## Apollo-link-pouchdb
+## Apollo-link-pouch
 
 Provides an Apollo Link to use GraphQL with a local PouchDB.
 
@@ -92,3 +92,23 @@ const client = new ApolloClient({
 ## Features
 
 - [ ] subscriptions (using sync listeners?)
+
+- [x] plugins (queries only for now)
+
+  using [pouchdb-quick-search](https://github.com/pouchdb-community/pouchdb-quick-search)
+
+  ```js
+  PouchDB.plugin(require('pouchdb-quick-search'))
+
+  const query = gql`
+    query searchPlugin {
+      search @pdbPlugin @search(query: "bob", fields: ["name"]) {
+        rows {
+          id
+          score
+        }
+        total_rows
+      }
+    }
+  `
+  ```

@@ -2,7 +2,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import * as PouchDB from 'pouchdb'
-import { createPouchLink } from '../../index'
+import { createPouchLink } from '../../../index'
 
 PouchDB.plugin(require('pouchdb-adapter-memory'))
 
