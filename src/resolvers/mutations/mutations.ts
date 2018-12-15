@@ -3,6 +3,7 @@ import { ExecInfo } from 'graphql-anywhere/lib/async'
 import * as has from 'lodash/has'
 import { MutationResolverContext, MutationResolverRoot } from '../../types'
 import { MutationDirective } from './directives'
+import { post } from './post'
 import { put } from './put'
 
 export const mutationsResolver: Resolver = async (
@@ -35,5 +36,9 @@ export const mutationsResolver: Resolver = async (
     return put(fieldName, root, payload, context, info)
   }
 
-  return payload
+  if (has(directives, MutationDirective.POST)) {
+    return post(fieldName, root, payload, context, info)
+  }
+
+  return null
 }

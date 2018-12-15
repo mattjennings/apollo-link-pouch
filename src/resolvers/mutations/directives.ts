@@ -1,3 +1,4 @@
 export enum MutationDirective {
-  PUT = 'pdbPut'
+  PUT = 'pdbPut',
+  POST = 'pdbPost'
 }

@@ -89,6 +89,28 @@ const client = new ApolloClient({
   `
   ```
 
+- [x] post
+
+  ```js
+  const mutation = gql`
+    fragment PersonInput on pouchdb {
+      _id: String
+      _rev: string
+      name: String
+    }
+
+    mutation postDoc($input: PersonInput!) {
+      createPerson(input: $input) @pdbPost {
+        _id
+        _rev
+        name
+      }
+    }
+  `
+  ```
+
+  `@pdbPost` also takes an options argument like `@pdbPut` example
+
 - [ ] bulkDocs
 
 - [x] allDocs
