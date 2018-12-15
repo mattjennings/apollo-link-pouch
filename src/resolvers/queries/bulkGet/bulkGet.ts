@@ -1,7 +1,7 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
 import { ResolverContext, ResolverRoot } from '../../../types'
-import { QueriesDirective } from '../directives'
+import { QueryDirective } from '../directives'
 
 export const bulkGet: Resolver = async (
   fieldName: string,
@@ -14,7 +14,7 @@ export const bulkGet: Resolver = async (
   const { database } = context
 
   const { docs, revs, attachments, binary } = directives[
-    QueriesDirective.BULK_GET
+    QueryDirective.BULK_GET
   ]
 
   return database.bulkGet({

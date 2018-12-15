@@ -16,16 +16,16 @@ import { graphql } from 'graphql-anywhere/lib/async'
 import { ResolverContext } from './types'
 
 // resolvers
-// import mutationResolver from './mutationResolver'
+import { mutationsResolver } from './resolvers/mutations'
 import { queriesResolver } from './resolvers/queries'
-import { QueriesDirective } from './resolvers/queries/directives'
+import { QueryDirective } from './resolvers/queries/directives'
 
 const getResolver = (operationType: string): Resolver => {
   switch (operationType) {
     case 'query':
       return queriesResolver
-    // case 'mutation':
-    //   return mutationResolver
+    case 'mutation':
+      return mutationsResolver
     default:
       throw new Error(`${operationType} not supported`)
   }
@@ -45,8 +45,8 @@ export default class PouchLink extends ApolloLink {
   ): Observable<FetchResult> {
     const { query } = operation
 
-    const pouchDirectives = Object.keys(QueriesDirective).map(
-      key => QueriesDirective[key]
+    const pouchDirectives = Object.keys(QueryDirective).map(
+      key => QueryDirective[key]
     )
 
     const isPouchQuery = hasDirectives(pouchDirectives, query)

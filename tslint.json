@@ -2,6 +2,10 @@
   "exclude": ["node_modules", "lib"],
   "extends": ["tslint-react", "tslint:latest", "tslint-config-prettier"],
   "rules": {
-    "no-submodule-imports": false
+    "no-submodule-imports": false,
+    "interface-name": false,
+    "no-implicit-dependencies": [true, "dev"],
+    "no-var-requires": false,
+    "object-literal-sort-keys": false
   }
 }

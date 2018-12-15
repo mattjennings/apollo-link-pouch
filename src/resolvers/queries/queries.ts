@@ -4,7 +4,8 @@ import * as has from 'lodash/has'
 import { ResolverContext, ResolverRoot } from '../../types'
 import { allDocs } from './allDocs'
 import { bulkGet } from './bulkGet'
-import { QueriesDirective } from './directives'
+import { QueryDirective } from './directives'
+
 import { get } from './get'
 import { plugin } from './plugin'
 import { query } from './query'
@@ -28,22 +29,23 @@ export const queriesResolver: Resolver = async (
     return typeof root[resultKey] !== 'undefined' ? root[resultKey] : null
   }
 
-  if (has(directives, QueriesDirective.GET)) {
+  if (has(directives, QueryDirective.GET)) {
     return get(fieldName, root, args, context, info)
   }
 
-  if (has(directives, QueriesDirective.BULK_GET)) {
+  if (has(directives, QueryDirective.BULK_GET)) {
     return bulkGet(fieldName, root, args, context, info)
   }
 
-  if (has(directives, QueriesDirective.ALL_DOCS)) {
+  if (has(directives, QueryDirective.ALL_DOCS)) {
     return allDocs(fieldName, root, args, context, info)
   }
 
-  if (has(directives, QueriesDirective.PLUGIN)) {
+  if (has(directives, QueryDirective.PLUGIN)) {
     return plugin(fieldName, root, args, context, info)
   }
-  if (has(directives, QueriesDirective.QUERY)) {
+
+  if (has(directives, QueryDirective.QUERY)) {
     return query(fieldName, root, args, context, info)
   }
 

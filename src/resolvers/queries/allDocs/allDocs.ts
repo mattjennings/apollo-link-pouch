@@ -1,7 +1,7 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
 import { ResolverContext, ResolverRoot } from '../../../types'
-import { QueriesDirective } from '../directives'
+import { QueryDirective } from '../directives'
 
 export const allDocs: Resolver = async (
   fieldName: string,
@@ -25,7 +25,7 @@ export const allDocs: Resolver = async (
     limit,
     skip,
     descending
-  } = directives[QueriesDirective.ALL_DOCS]
+  } = directives[QueryDirective.ALL_DOCS]
 
   return database.allDocs({
     keys,

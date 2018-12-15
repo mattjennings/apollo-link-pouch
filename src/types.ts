@@ -12,9 +12,8 @@ export interface ResolverRoot {
 }
 
 export interface MutationResolverRoot {
+  type?: string
   __typename?: string
-  __pushKey?: string
-  payload?: any
 }
 
 export interface DirectiveArgs {

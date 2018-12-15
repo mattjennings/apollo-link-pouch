@@ -2,7 +2,7 @@ import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
 import * as omit from 'lodash/omit'
 import { ResolverContext, ResolverRoot } from '../../../types'
-import { QueriesDirective } from '../directives'
+import { QueryDirective } from '../directives'
 
 export const plugin: Resolver = async (
   fieldName: string,
@@ -14,7 +14,7 @@ export const plugin: Resolver = async (
   const { directives, isLeaf, resultKey } = info
   const { database } = context
 
-  const plugins = omit(directives, QueriesDirective.PLUGIN)
+  const plugins = omit(directives, QueryDirective.PLUGIN)
   const [pluginFunction] = Object.keys(plugins)
 
   if (!database[pluginFunction]) {

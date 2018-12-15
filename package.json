@@ -79,6 +79,7 @@
     "graphql-anywhere": "^4.1.6",
     "graphql-tag": "^2.8.0",
     "graphql-tools": "^2.21.0",
-    "pouchdb": ">=6.4.0"
+    "pouchdb": ">=6.4.0",
+    "lodash/has": "latest"
   }
 }
