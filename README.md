@@ -154,7 +154,13 @@ const client = new ApolloClient({
 
 ## Features
 
-- [ ] subscriptions (using db change listener?)
+- [ ] subscriptions
+
+  - using db change listeners?
+
+- [ ] multiple databases
+
+  - via `@db` directive or additional `db` parameter to all queries/mutations?
 
 - [x] plugins (queries only for now)
 
