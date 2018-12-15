@@ -1,9 +1,9 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
 import { ResolverContext, ResolverRoot } from '../../../types'
-import { QueryDirective } from '../directives'
+import { QueriesDirective } from '../directives'
 
-export const allDocs: Resolver = async (
+export const query: Resolver = async (
   fieldName: string,
   root: ResolverRoot,
   args: any,
@@ -14,30 +14,39 @@ export const allDocs: Resolver = async (
   const { database } = context
 
   const {
-    keys,
-    include_docs,
-    conflicts,
-    attachments,
-    binary,
+    view,
+    reduce,
     startkey,
     endkey,
     inclusive_end,
+    include_docs,
     limit,
     skip,
-    descending
-  } = directives[QueryDirective.ALL_DOCS]
+    descending,
+    key,
+    keys,
+    group,
+    group_level,
+    stale,
+    update_seq
+  } = directives[QueriesDirective.QUERY]
 
-  return database.allDocs({
-    keys,
-    include_docs,
-    conflicts,
-    attachments,
-    binary,
+  const queryOptions = {
+    reduce,
     startkey,
     endkey,
     inclusive_end,
+    include_docs,
     limit,
     skip,
-    descending
-  })
+    descending,
+    key,
+    keys,
+    group,
+    group_level,
+    stale,
+    update_seq
+  }
+
+  return database.query(view, queryOptions)
 }

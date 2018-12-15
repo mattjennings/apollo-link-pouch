@@ -88,7 +88,22 @@ const client = new ApolloClient({
   `
   ```
 
-- [ ] query
+- [x] query
+
+  ```js
+  const query = gql`
+    query queryPeople {
+      people @pdbQuery(view: "index", include_docs: true) {
+        rows {
+          doc {
+            name
+          }
+        }
+        total_rows
+      }
+    }
+  `
+  ```
 
 - [ ] find
 

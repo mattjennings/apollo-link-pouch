@@ -7,6 +7,7 @@ export interface MutationResolverContext extends ResolverContext {
 }
 
 export interface ResolverRoot {
+  type?: string
   __typename?: string
 }
 
