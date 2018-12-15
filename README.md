@@ -67,27 +67,27 @@ const client = new ApolloClient({
 
 - [x] put
 
-````js
-    const mutation = gql`
-      fragment PersonInput on pouchdb {
-        _id: String
-        _rev: string
-        name: String
-      }
+  ```js
+  const mutation = gql`
+    fragment PersonInput on pouchdb {
+      _id: String
+      _rev: string
+      name: String
+    }
 
-      fragment PutOptions on pouchdb {
-        force: Boolean
-      }
+    fragment PutOptions on pouchdb {
+      force: Boolean
+    }
 
-      mutation putDoc($input: PersonInput!, $options: PutOptions) {
-        updatePerson(input: $input) @pdbPut(options: $options) {
-          ok
-          _rev # for consistency with input, "rev" from db.put response is returned as "_rev"
-          name
-        }
+    mutation putDoc($input: PersonInput!, $options: PutOptions) {
+      updatePerson(input: $input) @pdbPut(options: $options) {
+        ok
+        _rev # for consistency with input, "rev" from db.put response is returned as "_rev"
+        name
       }
-    `
-    ```
+    }
+  `
+  ```
 
 - [ ] bulkDocs
 
@@ -108,6 +108,8 @@ const client = new ApolloClient({
       }
     }
   `
+  ```
+
 ````
 
 - [x] query
@@ -153,3 +155,4 @@ const client = new ApolloClient({
     }
   `
   ```
+````
