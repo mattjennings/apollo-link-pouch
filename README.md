@@ -85,7 +85,7 @@ const client = new ApolloClient({
   `
   ```
 
-`@pdbPut` also takes an options argument for put options
+  `@pdbPut` also takes an options argument for put options
 
 - [x] post
 
@@ -107,7 +107,7 @@ const client = new ApolloClient({
   `
   ```
 
-`@pdbPost` also takes an options argument for post options
+  `@pdbPost` also takes an options argument for post options
 
 - [x] bulkDocs
 
