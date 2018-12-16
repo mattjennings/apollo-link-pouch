@@ -74,22 +74,46 @@ const client = new ApolloClient({
       _rev: string
       name: String
     }
+  ```
 
-    fragment PutOptions on pouchdb {
-      force: Boolean
-    }
 
-    mutation putDoc($input: PersonInput!, $options: PutOptions) {
-      updatePerson(input: $input) @pdbPut(options: $options) {
+    mutation putDoc($input: PersonInput!) {
+      updatePerson(input: $input) @pdbPut {
         ok
         _rev # for consistency with input, "rev" from db.put response is returned as "_rev"
         name
       }
     }
-  `
-  ```
+
+`
+
+````
+
+`@pdbPut` also takes an options argument for put options
 
 - [x] post
+
+```js
+const mutation = gql`
+  fragment PersonInput on pouchdb {
+    _id: String
+    _rev: string
+    name: String
+  }
+
+  mutation postDoc($input: PersonInput!) {
+    createPerson(input: $input) @pdbPost {
+      _id
+      _rev
+      name
+    }
+  }
+`
+````
+
+`@pdbPost` also takes an options argument for post options
+
+- [x] bulkDocs
 
   ```js
   const mutation = gql`
@@ -99,8 +123,8 @@ const client = new ApolloClient({
       name: String
     }
 
-    mutation postDoc($input: PersonInput!) {
-      createPerson(input: $input) @pdbPost {
+    mutation postDoc($input: [PersonInput]!) {
+      savePeople(input: $input) @pdbBulkDocs {
         _id
         _rev
         name
@@ -109,9 +133,7 @@ const client = new ApolloClient({
   `
   ```
 
-  `@pdbPost` also takes an options argument like `@pdbPut` example
-
-- [ ] bulkDocs
+  `@pdbBulkDocs` also takes an options argument for bulkDocs options
 
 - [x] allDocs
 

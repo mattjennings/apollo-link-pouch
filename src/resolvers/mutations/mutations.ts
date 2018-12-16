@@ -2,6 +2,7 @@ import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
 import * as has from 'lodash/has'
 import { MutationResolverContext, MutationResolverRoot } from '../../types'
+import { bulkDocs } from './bulkDocs/bulkDocs'
 import { MutationDirective } from './directives'
 import { post } from './post'
 import { put } from './put'
@@ -38,6 +39,10 @@ export const mutationsResolver: Resolver = async (
 
   if (has(directives, MutationDirective.POST)) {
     return post(fieldName, root, payload, context, info)
+  }
+
+  if (has(directives, MutationDirective.BULK_DOCS)) {
+    return bulkDocs(fieldName, root, payload, context, info)
   }
 
   return null
