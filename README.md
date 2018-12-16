@@ -74,8 +74,6 @@ const client = new ApolloClient({
       _rev: string
       name: String
     }
-  ```
-
 
     mutation putDoc($input: PersonInput!) {
       updatePerson(input: $input) @pdbPut {
@@ -84,10 +82,8 @@ const client = new ApolloClient({
         name
       }
     }
-
-`
-
-````
+  `
+  ```
 
 `@pdbPut` also takes an options argument for put options
 
@@ -109,7 +105,7 @@ const mutation = gql`
     }
   }
 `
-````
+```
 
 `@pdbPost` also takes an options argument for post options
 
