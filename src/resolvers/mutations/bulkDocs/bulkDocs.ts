@@ -1,6 +1,5 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
-import * as has from 'lodash/has'
 import { MutationResolverContext, MutationResolverRoot } from '../../../types'
 import { MutationDirective } from '../directives'
 
