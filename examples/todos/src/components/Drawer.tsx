@@ -17,165 +17,116 @@ import {
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MailIcon from '@material-ui/icons/Mail'
 import MenuIcon from '@material-ui/icons/Menu'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import classNames from 'classnames'
 import React from 'react'
+import Hidden from '@material-ui/core/Hidden'
+
+export interface DrawerProps extends WithStyles<typeof styles>, WithTheme {
+  menu: React.ReactNode
+}
+export interface DrawerState {
+  mobileOpen: boolean
+}
 
 const drawerWidth = 240
-
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'flex'
     },
-    appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
+    drawer: {
+      [theme.breakpoints.up('sm')]: {
+        width: drawerWidth,
+        flexShrink: 0
+      }
     },
-    appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
+    appBar: {
       marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
+      [theme.breakpoints.up('sm')]: {
+        width: `calc(100% - ${drawerWidth}px)`
+      }
     },
     menuButton: {
-      marginLeft: 12,
-      marginRight: 20
+      marginRight: 20,
+      [theme.breakpoints.up('sm')]: {
+        display: 'none'
+      }
     },
-    hide: {
-      display: 'none'
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0
-    },
+    toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth
     },
-    drawerHeader: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: '0 8px',
-      ...theme.mixins.toolbar,
-      justifyContent: 'flex-end'
-    },
     content: {
       flexGrow: 1,
-      padding: theme.spacing.unit * 3,
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      }),
-      marginLeft: -drawerWidth
-    },
-    contentShift: {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      }),
-      marginLeft: 0
+      padding: theme.spacing.unit * 3
     }
   })
 
-export interface DrawerProps extends WithStyles<typeof styles>, WithTheme {}
-export interface DrawerState {
-  open: boolean
-}
-
 class Drawer extends React.Component<DrawerProps, DrawerState> {
-  public state = {
-    open: false
+  state: DrawerState = {
+    mobileOpen: false
   }
 
-  public handleDrawerOpen = () => {
-    this.setState({ open: true })
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }))
   }
 
-  public handleDrawerClose = () => {
-    this.setState({ open: false })
-  }
-
-  public render() {
+  render() {
     const { classes, theme } = this.props
-    const { open } = this.state
 
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar
-          position="fixed"
-          className={classNames(classes.appBar, {
-            [classes.appBarShift]: open
-          })}
-        >
-          <Toolbar disableGutters={!open}>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, open && classes.hide)}
+              onClick={this.handleDrawerToggle}
+              className={classes.menuButton}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap={true}>
+            <Typography variant="h6" color="inherit" noWrap>
               Notes
             </Typography>
           </Toolbar>
         </AppBar>
-        <MuiDrawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button={true} key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button={true} key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </MuiDrawer>
-        <main
-          className={classNames(classes.content, {
-            [classes.contentShift]: open
-          })}
-        >
-          <div className={classes.drawerHeader} />
+        <nav className={classes.drawer}>
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Hidden smUp implementation="css">
+            <MuiDrawer
+              variant="temporary"
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              open={this.state.mobileOpen}
+              onClose={this.handleDrawerToggle}
+              classes={{
+                paper: classes.drawerPaper
+              }}
+              ModalProps={{
+                keepMounted: true // Better open performance on mobile.
+              }}
+            >
+              {this.props.menu}
+            </MuiDrawer>
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <MuiDrawer
+              classes={{
+                paper: classes.drawerPaper
+              }}
+              variant="permanent"
+              open
+            >
+              {this.props.menu}
+            </MuiDrawer>
+          </Hidden>
+        </nav>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
           {this.props.children}
         </main>
       </div>

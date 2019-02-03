@@ -1,6 +1,6 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
-import * as omit from 'lodash/omit'
+import omit from 'lodash/omit'
 import { ResolverContext, ResolverRoot } from '../../../types'
 import { QueryDirective } from '../directives'
 
