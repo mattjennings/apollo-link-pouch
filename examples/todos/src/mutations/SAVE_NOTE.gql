@@ -1,0 +1,15 @@
+fragment Input on Note {
+  _id: String
+  title: String
+  content: String
+}
+
+mutation saveNote($input: Input!) {
+  saveResponse(input: $input) @pdbPut {
+    _id
+    _rev
+    title
+    content
+    type
+  }
+}

@@ -18,6 +18,8 @@ import AddIcon from '@material-ui/icons/Add'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
+import ALL_NOTES_QUERY from '../queries/ALL_NOTES.gql'
+
 export interface NotesProps extends WithStyles<typeof styles> {}
 
 const styles = (theme: Theme) =>
@@ -30,19 +32,6 @@ const styles = (theme: Theme) =>
     }
   })
 
-export const ALL_NOTES_QUERY = gql`
-  query getNotes {
-    notes @pdbPlugin @find(selector: { type: "note" }) {
-      docs {
-        _id
-        title
-        content
-        type
-      }
-    }
-  }
-`
-
 function Notes(props: NotesProps) {
   const { classes } = props
 
@@ -53,7 +42,7 @@ function Notes(props: NotesProps) {
       {({ loading, error, data }) => {
         if (loading) return <p>Loading...</p>
         if (error) return <p>Error: {error.toString()}</p>
-        console.log(data.notes.docs)
+
         return (
           <Drawer
             menu={
@@ -77,7 +66,11 @@ function Notes(props: NotesProps) {
               </List>
             }
           >
-            <Note id={currentNoteId} />
+            <Note
+              id={currentNoteId}
+              onDelete={() => setCurrentNoteId('')}
+              onCreate={id => setCurrentNoteId(id)}
+            />
           </Drawer>
         )
       }}

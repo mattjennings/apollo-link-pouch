@@ -15,6 +15,7 @@ export interface NoteFormProps extends WithStyles<typeof styles> {
   content?: string
 
   onSave: (note: { title: string; content: string }) => any
+  onDelete?: () => any
 }
 
 const styles = () =>
@@ -23,7 +24,7 @@ const styles = () =>
   })
 
 function NoteForm(props: NoteFormProps) {
-  const { classes } = props
+  const { classes, onDelete, onSave } = props
 
   const [title, setTitle] = useState(props.title || '')
   const [content, setContent] = useState(props.content || '')
@@ -44,7 +45,18 @@ function NoteForm(props: NoteFormProps) {
         margin="dense"
         onChange={ev => setContent(ev.target.value)}
       />
-      <Button onClick={() => props.onSave({ title, content })}>SAVE</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => onSave({ title, content })}
+      >
+        SAVE
+      </Button>
+      {onDelete && (
+        <Button variant="text" color="secondary" onClick={onDelete}>
+          DELETE
+        </Button>
+      )}
     </div>
   )
 }

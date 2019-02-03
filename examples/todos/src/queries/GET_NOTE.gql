@@ -1,0 +1,8 @@
+query getNote($id: String) {
+  note @pdbGet(id: $id) {
+    _id
+    _rev
+    title
+    content
+  }
+}

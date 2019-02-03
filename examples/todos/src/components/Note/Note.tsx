@@ -7,10 +7,11 @@ import {
 } from '@material-ui/core'
 import React, { useState } from 'react'
 import { Query, Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
 import NoteForm from './NoteForm'
 import uuidv4 from 'uuid/v4'
-import { ALL_NOTES_QUERY } from '../Notes'
+import ALL_NOTES_QUERY from '../../queries/ALL_NOTES.gql'
+import GET_NOTE_QUERY from '../../queries/GET_NOTE.gql'
+import SAVE_NOTE_MUTATION from '../../mutations/SAVE_NOTE.gql'
 
 export type NoteDocument = PouchDB.Core.Document<{
   id?: string
@@ -21,6 +22,9 @@ export type NoteDocument = PouchDB.Core.Document<{
 export interface NoteProps extends WithStyles<typeof styles> {
   id?: string
   new?: boolean
+
+  onCreate: (id: string) => any
+  onDelete: () => any
 }
 
 const styles = () =>
@@ -28,40 +32,11 @@ const styles = () =>
     root: {}
   })
 
-export const GET_NOTE_QUERY = gql`
-  query getNote($id: String) {
-    note @pdbGet(id: $id) {
-      _id
-      _rev
-      title
-      content
-    }
-  }
-`
-
-const mutation = gql`
-  fragment Input on Note {
-    _id: String
-    title: String
-    content: String
-  }
-
-  mutation saveNote($input: Input!) {
-    saveResponse(input: $input) @pdbPut {
-      _id
-      _rev
-      title
-      content
-      type
-    }
-  }
-`
-
 function Note(props: NoteProps) {
-  const { classes, id } = props
+  const { classes, id, onDelete, onCreate } = props
 
   return (
-    <Mutation mutation={mutation}>
+    <Mutation mutation={SAVE_NOTE_MUTATION}>
       {(saveNote, { loading, error, data }) => {
         return id ? (
           <Query query={GET_NOTE_QUERY} variables={{ id }}>
@@ -75,24 +50,47 @@ function Note(props: NoteProps) {
                   content={data.note.content}
                   onSave={editedNote =>
                     saveNote({
-                      variables: { input: { ...data.note, ...editedNote } },
-                      refetchQueries: [ALL_NOTES_QUERY, GET_NOTE_QUERY]
+                      variables: {
+                        input: { ...data.note, ...editedNote }
+                      }
                     })
                   }
+                  onDelete={() => {
+                    saveNote({
+                      variables: {
+                        input: { ...data.note, _deleted: true }
+                      },
+                      refetchQueries: [
+                        {
+                          query: ALL_NOTES_QUERY
+                        }
+                      ]
+                    })
+
+                    onDelete()
+                  }}
                 />
               )
             }}
           </Query>
         ) : (
           <NoteForm
-            onSave={editedNote =>
-              saveNote({
+            onSave={async editedNote => {
+              const res = await saveNote({
                 variables: {
                   input: { _id: uuidv4(), ...editedNote, type: 'note' }
                 },
-                refetchQueries: ALL_NOTES_QUERY
+                refetchQueries: [
+                  {
+                    query: ALL_NOTES_QUERY
+                  }
+                ]
               })
-            }
+
+              if (res) {
+                onCreate(res.data.saveResponse._id)
+              }
+            }}
           />
         )
       }}
