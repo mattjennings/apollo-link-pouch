@@ -44,13 +44,13 @@ function Note(props: NoteProps) {
                 <NoteForm
                   title={data.note.title}
                   content={data.note.content}
-                  onSave={editedNote =>
+                  onSave={editedNote => {
                     saveNote({
                       variables: {
                         input: { ...data.note, ...editedNote }
                       }
                     })
-                  }
+                  }}
                   onDelete={() => {
                     saveNote({
                       variables: {

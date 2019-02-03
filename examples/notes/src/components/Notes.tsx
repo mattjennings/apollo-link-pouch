@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { Query } from 'react-apollo'
 import ALL_NOTES_QUERY from '../queries/ALL_NOTES.gql'
-import Note from './/Note'
+import Note from './Note'
 import Drawer from './Drawer'
 
 function Notes() {

@@ -35,6 +35,8 @@ function NoteForm(props: NoteFormProps) {
     [props.title, props.content]
   )
 
+  const dirty = title !== props.title || content !== props.content
+
   return (
     <div className={classes.root}>
       <TextField
@@ -54,6 +56,7 @@ function NoteForm(props: NoteFormProps) {
       <Button
         variant="contained"
         color="primary"
+        disabled={!dirty}
         onClick={() => onSave({ title, content })}
       >
         SAVE

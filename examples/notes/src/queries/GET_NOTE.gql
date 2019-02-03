@@ -4,5 +4,6 @@ query getNote($id: String) {
     _rev
     title
     content
+    type
   }
 }
