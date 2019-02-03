@@ -1,11 +1,13 @@
 [![npm package](https://img.shields.io/npm/v/apollo-link-pouch/latest.svg)](https://www.npmjs.com/package/apollo-link-pouch)
 [![npm downloads](https://img.shields.io/npm/dm/apollo-link-pouch.svg)](https://www.npmjs.com/package/apollo-link-pouch)
 
-## Apollo-link-pouch
+## apollo-link-pouch
 
 Provides an Apollo Link to use GraphQL with a local PouchDB.
 
 Inspired by [apollo-link-firebase](https://github.com/Canner/apollo-link-firebase).
+
+**This is not yet ready for production!** There seem to be some issues with the caching so this may lead to some API changes. Feel free to make pull requests for any suggestions (I am still rather inexperienced with Apollo and could use the help).
 
 ## Installation
 
