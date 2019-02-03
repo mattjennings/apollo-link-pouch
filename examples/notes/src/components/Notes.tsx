@@ -1,40 +1,13 @@
-import {
-  createStyles,
-  Input,
-  TextField,
-  withStyles,
-  WithStyles,
-  Theme
-} from '@material-ui/core'
+import React, { useState } from 'react'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import React, { Component, useState } from 'react'
+import { Query } from 'react-apollo'
+import ALL_NOTES_QUERY from '../queries/ALL_NOTES.gql'
 import Note from './/Note'
 import Drawer from './Drawer'
-import Fab from '@material-ui/core/Fab'
-import AddIcon from '@material-ui/icons/Add'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
 
-import ALL_NOTES_QUERY from '../queries/ALL_NOTES.gql'
-
-export interface NotesProps extends WithStyles<typeof styles> {}
-
-const styles = (theme: Theme) =>
-  createStyles({
-    root: {},
-    addButton: {
-      position: 'absolute',
-      bottom: theme.spacing.unit * 2,
-      right: theme.spacing.unit * 2
-    }
-  })
-
-function Notes(props: NotesProps) {
-  const { classes } = props
-
+function Notes() {
   const [currentNoteId, setCurrentNoteId] = useState<string>('')
 
   return (
@@ -78,4 +51,4 @@ function Notes(props: NotesProps) {
   )
 }
 
-export default withStyles(styles)(Notes)
+export default Notes

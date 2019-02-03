@@ -19,7 +19,7 @@ export type NoteDocument = PouchDB.Core.Document<{
   content: string
 }>
 
-export interface NoteProps extends WithStyles<typeof styles> {
+export interface NoteProps {
   id?: string
   new?: boolean
 
@@ -27,18 +27,14 @@ export interface NoteProps extends WithStyles<typeof styles> {
   onDelete: () => any
 }
 
-const styles = () =>
-  createStyles({
-    root: {}
-  })
-
 function Note(props: NoteProps) {
-  const { classes, id, onDelete, onCreate } = props
+  const { id, onDelete, onCreate } = props
 
   return (
     <Mutation mutation={SAVE_NOTE_MUTATION}>
       {(saveNote, { loading, error, data }) => {
         return id ? (
+          // fetch note data and fill in NoteForm
           <Query query={GET_NOTE_QUERY} variables={{ id }}>
             {({ loading, error, data }) => {
               if (loading) return <p>Loading</p>
@@ -74,6 +70,7 @@ function Note(props: NoteProps) {
             }}
           </Query>
         ) : (
+          // show new NoteForm
           <NoteForm
             onSave={async editedNote => {
               const res = await saveNote({
@@ -98,4 +95,4 @@ function Note(props: NoteProps) {
   )
 }
 
-export default withStyles(styles)(Note)
+export default Note

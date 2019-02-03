@@ -87,7 +87,6 @@ class Drawer extends React.Component<DrawerProps, DrawerState> {
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Hidden smUp implementation="css">
             <MuiDrawer
               variant="temporary"
@@ -98,7 +97,7 @@ class Drawer extends React.Component<DrawerProps, DrawerState> {
                 paper: classes.drawerPaper
               }}
               ModalProps={{
-                keepMounted: true // Better open performance on mobile.
+                keepMounted: true
               }}
             >
               {this.props.menu}

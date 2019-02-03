@@ -1,14 +1,11 @@
 import {
   createStyles,
-  Input,
   TextField,
   withStyles,
   WithStyles,
   Button
 } from '@material-ui/core'
-import React, { useState } from 'react'
-import { Query, Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
+import React, { useState, useEffect } from 'react'
 
 export interface NoteFormProps extends WithStyles<typeof styles> {
   title?: string
@@ -28,6 +25,15 @@ function NoteForm(props: NoteFormProps) {
 
   const [title, setTitle] = useState(props.title || '')
   const [content, setContent] = useState(props.content || '')
+
+  // update state when prop values change
+  useEffect(
+    () => {
+      setTitle(props.title || '')
+      setContent(props.content || '')
+    },
+    [props.title, props.content]
+  )
 
   return (
     <div className={classes.root}>
