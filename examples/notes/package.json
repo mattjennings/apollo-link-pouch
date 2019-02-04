@@ -17,10 +17,13 @@
     "react-dom": "^16.7.0-alpha.2",
     "react-hot-loader": "^4.6.5",
     "typescript": "^3.2.2",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "apollo-link-pouch": "file:../../lib"
   },
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "parcel src/index.html",
+    "build": "rm -rf dist && parcel build src/index.html --public-url /examples/notes/",
+    "now-build": "npm run build"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

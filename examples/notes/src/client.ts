@@ -1,6 +1,6 @@
 import ApolloClient from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { createPouchLink } from '../../../'
+import { createPouchLink } from 'apollo-link-pouch'
 import PouchDB from 'pouchdb'
 
 const db = new PouchDB('notes')
