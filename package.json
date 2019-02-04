@@ -68,7 +68,10 @@
     "tslint-config-prettier": "^1.17.0",
     "tslint-react": "^3.6.0",
     "typescript": "^3.2.2",
-    "pouchdb": ">=6.4.0"
+    "pouchdb": ">=6.4.0",
+    "webpack": "4.19.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "3.1.14"
   },
   "repository": "mattjennings/apollo-link-pouchdb",
   "license": "MIT",
