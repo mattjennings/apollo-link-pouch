@@ -1,0 +1,40 @@
+{
+  "name": "notes",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.1",
+    "apollo-boost": "^0.1.27",
+    "apollo-cache-inmemory": "^1.4.2",
+    "classnames": "^2.2.6",
+    "graphql": "^14.0.2",
+    "pouchdb": "^7.0.0",
+    "pouchdb-find": "^7.0.0",
+    "prettier": "^1.15.3",
+    "react": "^16.7.0-alpha.2",
+    "react-apollo": "^2.4.1",
+    "react-dom": "^16.7.0-alpha.2",
+    "react-hot-loader": "^4.6.5",
+    "typescript": "^3.2.2",
+    "uuid": "^3.3.2",
+    "apollo-link-pouch": "file:../../lib"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "rm -rf dist && parcel build src/index.html --public-url /examples/notes/",
+    "now-build": "npm run build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@types/classnames": "^2.2.6",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.15",
+    "@types/pouchdb": "^6.3.2",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "@types/uuid": "^3.4.4",
+    "parcel-bundler": "^1.11.0",
+    "tslint": "^5.11.0"
+  }
+}

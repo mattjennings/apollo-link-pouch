@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "name": "apollo-link-pouch",
+  "alias": [
+    "apollo-link-pouch.mattjennings.io",
+    "www.apollo-link-pouch.mattjennings.io"
+  ],
+  "public": true,
+  "builds": [
+    { "src": "package.json", "use": "@now/node" },
+    { "src": "examples/notes/package.json", "use": "@now/static-build" }
+  ],
+  "routes": [
+    {
+      "src": "^/examples/notes/(.*)",
+      "dest": "/examples/notes/$1"
+    },
+
+    {
+      "src": "/",
+      "status": 301,
+      "headers": {
+        "Location": "https://github.com/mattjennings/apollo-link-pouch"
+      }
+    }
+  ]
+}

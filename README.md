@@ -7,7 +7,11 @@ Provides an Apollo Link to use GraphQL with a local PouchDB.
 
 Inspired by [apollo-link-firebase](https://github.com/Canner/apollo-link-firebase).
 
-**This is not yet ready for production!** There seem to be some issues with the caching so this may lead to some API changes. Feel free to make pull requests for any suggestions (I am still rather inexperienced with Apollo and could use the help).
+**This is not ready for production! Use at your own risk.** Feel free to make pull requests for any suggestions - I am still rather inexperienced with Apollo and could use the help.
+
+## Demos
+
+[Notes app](https://apollo-link-pouch.mattjennings.io/examples/notes)
 
 ## Installation
 

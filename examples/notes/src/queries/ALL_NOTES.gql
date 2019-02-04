@@ -1,0 +1,10 @@
+query allNotes {
+  notes @pdbPlugin @find(selector: { type: "note" }) {
+    docs {
+      _id
+      title
+      content
+      type
+    }
+  }
+}

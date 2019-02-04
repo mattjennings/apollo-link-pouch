@@ -1,11 +1,12 @@
 import { Resolver } from 'graphql-anywhere'
 import { ExecInfo } from 'graphql-anywhere/lib/async'
-import * as has from 'lodash/has'
+import has from 'lodash/has'
 import { ResolverContext, ResolverRoot } from '../../types'
 import { allDocs } from './allDocs'
 import { bulkGet } from './bulkGet'
 import { QueryDirective } from './directives'
 
+import { capitilize } from '../../utils'
 import { get } from './get'
 import { plugin } from './plugin'
 import { query } from './query'
