@@ -1,3 +1,11 @@
 {
-  "plugins": ["react-hot-loader/babel"]
+  "plugins": [
+    "react-hot-loader/babel",
+    [
+      "@babel/plugin-transform-react-jsx",
+      {
+        "pragmaFrag": "React.Fragment"
+      }
+    ]
+  ]
 }

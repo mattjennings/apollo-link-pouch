@@ -5367,6 +5367,13 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-spring@^7.2.10:
+  version "7.2.10"
+  resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-7.2.10.tgz#eacbf429327bea058677c3a01af87b9c387f4aa6"
+  integrity sha512-bsbgQh1DzTqjwuD1tDZ7Nu04G5JhNNXdezkcJ5xXNboedN/MPe0K+X/MtypUxXBUCLYT0r5oKT3zj4STqVpnPA==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
 react-transition-group@^2.2.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.1.tgz#67fbd8d30ebb1c57a149d554dbb82eabefa61f0d"
