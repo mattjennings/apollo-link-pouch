@@ -1,6 +1,6 @@
 {
   "name": "apollo-link-pouch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Use GraphQL with PouchDB and Apollo",
   "author": {
     "name": "Matt Jennings",
