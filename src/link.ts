@@ -19,6 +19,7 @@ import { ResolverContext } from './types'
 import { mutationsResolver } from './resolvers/mutations'
 import { queriesResolver } from './resolvers/queries'
 import { QueryDirective } from './resolvers/queries/directives'
+import { MutationDirective } from "./resolvers/mutations/directives"
 
 const getResolver = (operationType: string): Resolver => {
   switch (operationType) {
@@ -45,11 +46,14 @@ export default class PouchLink extends ApolloLink {
   ): Observable<FetchResult> {
     const { query } = operation
 
-    const pouchDirectives = Object.keys(QueryDirective).map(
-      key => QueryDirective[key]
-    )
 
+    //-- Combine all directives to determine if applicable for this link
+    let combDirectives = Object.assign({}, MutationDirective, QueryDirective);
+    let pouchDirectives = Object.keys(combDirectives).map(function(key) {
+      return combDirectives[key];
+    });
     const isPouchQuery = hasDirectives(pouchDirectives, query)
+    
 
     if (!isPouchQuery && forward) {
       return forward(operation)
